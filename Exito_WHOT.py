@@ -61,8 +61,8 @@ def shuffled(data):
                     mode = input("Type Market: ")
                     if mode == "Market":
                         arr1.append(market.pop(-1))
-                        print(f"Played pile: {played_container[-1]}")
-                        print(f"Remaining cards for Player 1 are: {arr1}") 
+                        print(f"Remaining cards for Player 1 are: {arr1}")
+                        print(f"Played pile: {played_container[-1]}") 
                     else:
                         print("Invalid Input, type 'Market'")
                 break
@@ -82,18 +82,19 @@ def shuffled(data):
                     played_card = arr2.pop(card_index)
                     played_container.append(played_card)
                     print(f"Remaining cards for Player 2 are: {arr2}")
+                    print(f"Played pile: {played_container[-1]}")
                 else:
                     print("Card doesn't match! Go to market.")
                     market_input = input("Type Market: ")
                     if market_input == "Market":
                         arr2.append(market.pop(-1))
                         print(f"Remaining cards for Player 2 are: {arr2}")
+                        print(f"Played pile: {played_container[-1]}")
                     else:
                         print("Invalid Input, type 'Market'")
                 break
 
-    print(f"Played pile: {played_container}")
- 
+   #  print(f"Played pile: {played_container}")
 
 items = [((n%7)+1, ['B', 'O', '+', '*','T'][n%5]) for n in range(20)]
 
