@@ -55,19 +55,19 @@ def shuffled(data):
                     played_card = arr1.pop(card_index)
                     played_container.append(played_card)
                     print(f"Remaining cards for Player 1 are: {arr1}")
+                    print(f"Played pile: {played_container[-1]}")
                 else:
                     print("Card doesn't match! Go to market.")
                     mode = input("Type Market: ")
                     if mode == "Market":
                         arr1.append(market.pop(-1))
-                        print(f"Remaining cards for Player 1 are: {arr1}")
+                        print(f"Played pile: {played_container[-1]}")
+                        print(f"Remaining cards for Player 1 are: {arr1}") 
                     else:
                         print("Invalid Input, type 'Market'")
                 break
-            
-        print(f"Played pile: {played_container}")
 
-        mode = "Player 2"
+        mode = input("Type 'Player 2': ")
 
     if mode == "Player 2":
         print(f"These are your cards Player 2: {arr2}")
