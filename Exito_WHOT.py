@@ -39,61 +39,82 @@ def shuffled(data):
     played_container = []
     top = market.pop(-1)
     played_container.append(top)
-    print(f"Compared card: {played_container}")
+    print(f"Played pile: {played_container}")
 
-    while len(arr1) >= 0 or len(arr2) >= 0:
+    while len(arr1) > 0 or len(arr2) > 0:
         mode = input("Player 1 turn, Type 'Player 1': ")
         
         if mode == "Player 1":
             print(f"These are your cards Player 1: {arr1}")
-            p1_input = int(input("Enter your desired card index from player 1 cards: "))
+            p1_input = input("Enter your desired card index from player 1 cards or Type 'Market' if you don't have: ")
 
-            played_container_number, played_container_shape = played_container[-1]
+            if p1_input == "Market":
+                arr1.append(market.pop(-1))
+                print(f"Remaining cards for Player 1 are: {arr1}")
+                print("\n")
+                print(f"Played pile: {played_container[-1]}")
+            else:
+                p1_input = int(p1_input)
+                played_container_number, played_container_shape = played_container[-1]
 
-            for card_index, (arr1_card_number, arr1_card_shape) in enumerate(arr1):
-                if p1_input == card_index:
-                    if arr1_card_number == played_container_number or arr1_card_shape == played_container_shape:
-                        played_card = arr1.pop(card_index)
-                        played_container.append(played_card)
-                        print(f"Remaining cards for Player 1 are: {arr1}")
-                        print(f"Played pile: {played_container[-1]}")
-                    else:
-                        print("Card doesn't match! Go to market.")
-                        mode = input("Type Market: ")
-                        if mode == "Market":
-                            arr1.append(market.pop(-1))
+                for card_index, (arr1_card_number, arr1_card_shape) in enumerate(arr1):
+                    if p1_input == card_index:
+                        if arr1_card_number == played_container_number or arr1_card_shape == played_container_shape:
+                            played_card = arr1.pop(card_index)
+                            played_container.append(played_card)
                             print(f"Remaining cards for Player 1 are: {arr1}")
-                            print(f"Played pile: {played_container[-1]}") 
+                            print("\n")
+                            print(f"Played pile: {played_container[-1]}")
                         else:
-                            print("Invalid Input, type 'Market'")
-                    break
+                            print("Card doesn't match! Go to market.")
+                            mode = input("Type Market: ")
+                            if mode == "Market":
+                                arr1.append(market.pop(-1))
+                                print(f"Remaining cards for Player 1 are: {arr1}")
+                                print("\n")
+                                print(f"Played pile: {played_container[-1]}")   
+                            else:
+                                print("Invalid Input, type 'Market'")
+                                print("\n")
+                        break
 
             mode = input("Player 2 turn, Type 'Player 2': ")
 
         if mode == "Player 2":
             print(f"These are your cards Player 2: {arr2}")
 
-            p2_input = int(input("Enter your desired card index from player 2 cards: "))
+            p2_input = input("Enter your desired card index from player 2 cards or Type 'Market' if you don't have: ")
+            
+            if p2_input == "Market":
+                arr1.append(market.pop(-1))
+                print(f"Remaining cards for Player 2 are: {arr2}")
+                print("\n")
+                print(f"Played pile: {played_container[-1]}")
 
-            played_container_number, played_container_shape = played_container[-1]
+            else:
+                p2_input = int(p2_input)
+                played_container_number, played_container_shape = played_container[-1]
 
-            for card_index, (arr2_card_number, arr2_card_shape) in enumerate(arr2):
-                if p2_input == card_index:
-                    if arr2_card_number == played_container_number or arr2_card_shape == played_container_shape:
-                        played_card = arr2.pop(card_index)
-                        played_container.append(played_card)
-                        print(f"Remaining cards for Player 2 are: {arr2}")
-                        print(f"Played pile: {played_container[-1]}")
-                    else:
-                        print("Card doesn't match! Go to market.")
-                        market_input = input("Type Market: ")
-                        if market_input == "Market":
-                            arr2.append(market.pop(-1))
+                for card_index, (arr2_card_number, arr2_card_shape) in enumerate(arr2):
+                    if p2_input == card_index:
+                        if arr2_card_number == played_container_number or arr2_card_shape == played_container_shape:
+                            played_card = arr2.pop(card_index)
+                            played_container.append(played_card)
                             print(f"Remaining cards for Player 2 are: {arr2}")
+                            print("\n")
                             print(f"Played pile: {played_container[-1]}")
                         else:
-                            print("Invalid Input, type 'Market'")
-                    break
+                            print("Card doesn't match! Go to market.")
+                            market_input = input("Type Market: ")
+                            if market_input == "Market":
+                                arr2.append(market.pop(-1))
+                                print(f"Remaining cards for Player 2 are: {arr2}")
+                                print("\n")
+                                print(f"Played pile: {played_container[-1]}")
+                            else:
+                                print("Invalid Input, type 'Market'")
+                                print("\n")
+                        break
 
     #  print(f"Played pile: {played_container}")
 
