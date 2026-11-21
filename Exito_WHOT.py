@@ -102,3 +102,7 @@ items = [((n%7)+1, ['B', 'O', '+', '*','T'][n%5]) for n in range(20)]
 print(shuffled(items))
 
 
+
+
+
+#Next we are working on the while loop to keep it running from player 1 to palyer 2 and vice versa so we continue from there
