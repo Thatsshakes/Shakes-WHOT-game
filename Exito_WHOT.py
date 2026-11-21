@@ -59,12 +59,40 @@ def shuffled(data):
                     print("Card doesn't match! Go to market.")
                     mode = input("Type Market: ")
                     if mode == "Market":
-                        arr1.append(top)
+                        arr1.append(market.pop(-1))
                         print(f"Remaining cards for Player 1 are: {arr1}")
                     else:
                         print("Invalid Input, type 'Market'")
-               
-    print(played_container)
+                break
+            
+        print(f"Played pile: {played_container}")
+
+        mode = "Player 2"
+
+    if mode == "Player 2":
+        print(f"These are your cards Player 2: {arr2}")
+
+        p2_input = int(input("Enter your desired card index from player 2 cards: "))
+
+        played_container_number, played_container_shape = played_container[-1]
+
+        for card_index, (arr2_card_number, arr2_card_shape) in enumerate(arr2):
+            if p2_input == card_index:
+                if arr2_card_number == played_container_number or arr2_card_shape == played_container_shape:
+                    played_card = arr2.pop(card_index)
+                    played_container.append(played_card)
+                    print(f"Remaining cards for Player 2 are: {arr2}")
+                else:
+                    print("Card doesn't match! Go to market.")
+                    market_input = input("Type Market: ")
+                    if market_input == "Market":
+                        arr2.append(market.pop(-1))
+                        print(f"Remaining cards for Player 2 are: {arr2}")
+                    else:
+                        print("Invalid Input, type 'Market'")
+                break
+
+    print(f"Played pile: {played_container}")
  
 
 items = [((n%7)+1, ['B', 'O', '+', '*','T'][n%5]) for n in range(20)]
