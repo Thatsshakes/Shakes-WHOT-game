@@ -10,6 +10,38 @@ def irand():
 print(irand())
 
 
+
+def check_game_over(arr1, arr2, market):
+    if len(arr1) == 0:
+        print("Player 1 has no cards left! PLAYER 1 WINS!!!")
+        return True
+    elif len(arr2) == 0:
+        print("Player 2 has no card left! PLAYER 2 WINS!!!")
+        return True
+
+
+    elif len(market) == 0:
+        p1_sum = 0
+        for (arr1_card_number, arr1_card_shape) in arr1:
+            p1_sum += arr1_card_number
+        print(f"Player 1 cards: {arr1} -> Total: {p1_sum}")
+
+        p2_sum = 0
+        for (arr2_card_number, arr2_card_shape) in arr2:
+            p2_sum += arr2_card_number
+        print(f"Player 2 cards: {arr2} -> Total: {p2_sum}")
+
+        if p1_sum < p2_sum:
+            print("PLAYER 1 WINS!!! with the lowest sum")
+
+        elif p2_sum < p1_sum:
+            print("PLAYER 2 WINS!!! with the lowest sum")
+
+        else:
+            print("It's a TIE!")
+        return True
+        
+
 def shuffled(data):
     for index in range(len(items)-1, 0, -1):     #steady looper backwards
         random_pointer = int(irand() * (index+1)) 
@@ -41,18 +73,19 @@ def shuffled(data):
     played_container.append(top)
     print(f"Played pile: {played_container}")
 
-    while len(arr1) > 0 or len(arr2) > 0:
-        mode = input("Player 1 turn, Type 'Player 1': ")
+    while len(arr1) > 0 and len(arr2) > 0:
+        mode = input("Player 1 turn, Type 'Player 1': ").strip().capitalize()
         
         if mode == "Player 1":
             print(f"These are your cards Player 1: {arr1}")
-            p1_input = input("Enter your desired card index from player 1 cards or Type 'Market' if you don't have: ")
+            p1_input = input("Enter your desired card index from player 1 cards or Type 'Market' if you don't have: ").strip().capitalize()
 
             if p1_input == "Market":
                 arr1.append(market.pop(-1))
                 print(f"Remaining cards for Player 1 are: {arr1}")
                 print("\n")
                 print(f"Played pile: {played_container[-1]}")
+                
             else:
                 p1_input = int(p1_input)
                 played_container_number, played_container_shape = played_container[-1]
@@ -67,7 +100,7 @@ def shuffled(data):
                             print(f"Played pile: {played_container[-1]}")
                         else:
                             print("Card doesn't match! Go to market.")
-                            mode = input("Type Market: ")
+                            mode = input("Type Market: ").strip().capitalize()
                             if mode == "Market":
                                 arr1.append(market.pop(-1))
                                 print(f"Remaining cards for Player 1 are: {arr1}")
@@ -78,15 +111,18 @@ def shuffled(data):
                                 print("\n")
                         break
 
-            mode = input("Player 2 turn, Type 'Player 2': ")
+            if check_game_over(arr1, arr2, market):
+                break
+
+            mode = input("Player 2 turn, Type 'Player 2': ").strip().capitalize()
 
         if mode == "Player 2":
             print(f"These are your cards Player 2: {arr2}")
 
-            p2_input = input("Enter your desired card index from player 2 cards or Type 'Market' if you don't have: ")
+            p2_input = input("Enter your desired card index from player 2 cards or Type 'Market' if you don't have: ").strip().capitalize()
             
             if p2_input == "Market":
-                arr1.append(market.pop(-1))
+                arr2.append(market.pop(-1))
                 print(f"Remaining cards for Player 2 are: {arr2}")
                 print("\n")
                 print(f"Played pile: {played_container[-1]}")
@@ -116,6 +152,9 @@ def shuffled(data):
                                 print("\n")
                         break
 
+            if check_game_over(arr1, arr2, market):
+                break
+
     #  print(f"Played pile: {played_container}")
 
 items = [((n%7)+1, ['B', 'O', '+', '*','T'][n%5]) for n in range(20)]
@@ -127,4 +166,4 @@ print(shuffled(items))
 
 
 
-#Next we are working on the while loop to keep it running from player 1 to palyer 2 and vice versa so we continue from there
+#Next we are working on last card and check up when either of the player cards are remaining 1 card
