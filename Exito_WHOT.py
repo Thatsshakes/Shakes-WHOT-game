@@ -56,8 +56,14 @@ def shuffled(data):
                     played_container.append(played_card)
                     print(f"Remaining cards for Player 1 are: {arr1}")
                 else:
-                    print("Card doesn't match! Going to market...")
-                    arr1.append(top)
+                    print("Card doesn't match! Go to market.")
+                    mode = input("Type Market: ")
+                    if mode == "Market":
+                        arr1.append(top)
+                        print(f"Remaining cards for Player 1 are: {arr1}")
+                    else:
+                        print("Invalid Input, type 'Market'")
+               
     print(played_container)
  
 
